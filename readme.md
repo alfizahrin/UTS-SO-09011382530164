@@ -12,25 +12,25 @@
 
 ## 2. Deskripsi Program
 
-Program ini melakukan backup otomatis terhadap seluruh file `.txt` di dalam folder `~/data_09011282530120` (termasuk subfolder).
+Program ini melakukan backup otomatis terhadap seluruh file `.txt` di dalam folder `~/data_09011382530164` (termasuk subfolder).
 
 Script yang dibuat:
 
 | Script | Fungsi |
 |---|---|
-| `script/backup.sh` | Mencari file `.txt` dengan `find`, mengarsipkan dan mengompresi dengan `tar` + `gzip` menjadi `backup_09011282530120_<timestamp>.tar.gz`, memverifikasi isi arsip, lalu mencatat hasilnya ke `backup.log` |
+| `script/backup.sh` | Mencari file `.txt` dengan `find`, mengarsipkan dan mengompresi dengan `tar` + `gzip` menjadi `backup_09011382530164_<timestamp>.tar.gz`, memverifikasi isi arsip, lalu mencatat hasilnya ke `backup.log` |
 | `script/backup_loop.sh` | Menjalankan `backup.sh` berulang setiap 60 detik (dipakai untuk demonstrasi job control di background) |
 | `script/alias.sh` | Mendefinisikan alias `bk120` sebagai jalan pintas untuk menjalankan `backup.sh` |
 
 Lokasi penting:
-- Folder sumber : `~/data_09011282530120`
-- Folder backup : `~/backup_09011282530120`
-- File log      : `~/backup_09011282530120/backup.log` (format: `waktu | nama arsip | jumlah file | ukuran`)
+- Folder sumber : `~/data_09011382530164`
+- Folder backup : `~/backup_09011382530164`
+- File log      : `~/backup_09011382530164/backup.log` (format: `waktu | nama arsip | jumlah file | ukuran`)
 
 Struktur repositori:
 
 ```
-uts-so-09011282530120/
+uts-so-09011382530164/
 ├── README.md
 ├── images/
 └── script/
@@ -44,8 +44,8 @@ uts-so-09011282530120/
 ### 3.1 Persiapan data uji
 
 ```bash
-mkdir -p ~/data_09011282530120/subfolder1 ~/data_09011282530120/subfolder2
-cd ~/data_09011282530120
+mkdir -p ~/data_09011382530164/subfolder1 ~/data_09011382530164/subfolder2
+cd ~/data_09011382530164
 for i in $(seq 1 10); do echo "isi file $i" > "file$i.txt"; done
 echo x > catatan.md; echo x > foto.jpg
 for s in subfolder1 subfolder2; do echo a > $s/a.txt; echo b > $s/b.txt; done
@@ -56,7 +56,7 @@ for s in subfolder1 subfolder2; do echo a > $s/a.txt; echo b > $s/b.txt; done
 ### 3.2 Memberi izin eksekusi
 
 ```bash
-cd ~/uts-so-09011282530120
+cd ~/uts-so-09011382530164
 chmod +x script/*.sh
 ```
 
@@ -66,8 +66,8 @@ chmod +x script/*.sh
 
 ```bash
 ./script/backup.sh
-cat ~/backup_09011282530120/backup.log
-ls ~/backup_09011282530120/
+cat ~/backup_09011382530164/backup.log
+ls ~/backup_09011382530164/
 ```
 
 ![Hasil menjalankan backup.sh](images/images3.png)
@@ -76,7 +76,7 @@ ls ~/backup_09011282530120/
 ### 3.4 Menggunakan alias
 
 ```bash
-echo "source $HOME/uts-so-09011282530120/script/alias.sh" >> ~/.bashrc
+echo "source $HOME/uts-so-09011382530164/script/alias.sh" >> ~/.bashrc
 source ~/.bashrc
 bk120
 ```
@@ -153,7 +153,7 @@ jobs -l
 **f. Bukti log bertambah selama loop berjalan**
 
 ```bash
-cat ~/backup_09011282530120/backup.log
+cat ~/backup_09011382530164/backup.log
 ```
 
 ![Log hasil loop](images/images11.png)
@@ -164,7 +164,5 @@ cat ~/backup_09011282530120/backup.log
 
 | No | Kendala | Penyebab | Solusi |
 |---|---|---|---|
-| 1 | _(isi kendala)_ | _(isi penyebab)_ | _(isi solusi)_ |
-| 2 | _(isi kendala)_ | _(isi penyebab)_ | _(isi solusi)_ |
-
-![Contoh pesan error (opsional)](images/13-kendala.png)
+| 1 | Kesulitan Mengerjakan menggunakan nano | tidak terbiasa menulis kode di nano | Menggunakan Software |
+| 2 | Kurang memahami Shell | Awam dalam Linux | Meminta bantuan AI untuk membuat Shell Script Beserta Penjelasannya yang bisa saya pelajari |
